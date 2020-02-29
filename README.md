@@ -70,6 +70,13 @@ instructions:
 
 ## Authentication
 
+### GET to view a list of existing users
+`/api/users`
+
+Requires a valid token.
+
+Returns a list of all existing users in the database.
+
 ### POST to register a new user
 `/api/auth/register`
 
@@ -89,12 +96,51 @@ This will return an JWT Authorization token that will be used for private routin
 
 ## Recipe Management
 
+## GET / Retrieve Actions
+
 ### GET a list of existing recipes
 `/api/recipes`
 
 Requires a valid token.
 
-Returns all list of existing recipes in the database.
+Returns list of all existing recipes in the database.
+
+### GET a recipe by recipe id
+`/api/recipes/:id`
+
+Requires a valid token.
+
+Returns an recipe based on the **_id_** parameter.
+
+### GET a list of existing ingredients
+`/api/ingredients`
+
+Requires a valid token.
+
+Returns list of all existing ingredients in the database.
+
+### GET an ingredient by ingredient id
+`/api/ingredients/:id`
+
+Requires a valid token.
+
+Returns an ingredient based on the **_id_** parameter.
+
+### GET a list of existing categories
+`/api/recipes/categories`
+
+Requires a valid token.
+
+Returns a list of all existing recipe categories in the database.
+
+### GET a list of instructions for a particular recipe by recipe id
+`/api/recipes/:id/instructions`
+
+Requires a valid token.
+
+Returns a list of all instructions / steps for a specific recipe based on the recipe's **_id_**.
+
+## POST / Creation Actions
 
 ### POST to create a new recipe
 `/api/recipes`
@@ -107,7 +153,7 @@ Required fields for creating a recipe:
 - category_id
 - user_id
 
-data schema
+data schema:
 ```json
 {
     "id": 1,
@@ -117,3 +163,145 @@ data schema
     "user_id": 1
 }
 ```
+
+Returns the created recipe.
+
+### POST to create a new recipe category
+`/api/recipes/categories`
+
+Requires a valid token.
+
+Required fields for creating a recipe category:
+- title
+
+data schema:
+```json
+{
+    "title": "breakfast"
+}
+```
+
+Returns the created recipe category.
+
+### POST to add a new ingredient to the database
+`/api/ingredients`
+
+Requires a valid token.
+
+Required fields for adding a new ingredient to the database:
+- name
+- description
+
+data schema:
+```json
+{
+    "name": "cheese",
+    "description": "pepperjack"
+}
+```
+
+Returns the created ingredient.
+
+### POST to create a new instruction / step for recipes
+`/api/recipes/instructions`
+
+Requires a valid token.
+
+Required fields for adding a new recipe instruction / step:
+- recipe_id
+- step #
+- description
+
+```json
+{
+    "step": 2,
+    "description": "Preheat the oven",
+    "recipe_id": 1
+}
+```
+
+Returns the created instruction / step.
+
+## Edit / Modify / PUT Actions
+
+### PUT to modify a recipe by recipe id
+`/api/recipes/:id`
+
+Requires a valid token.
+
+Required fields for modifying / updating a recipe:
+- title
+- source
+- category_id
+
+data schema:
+```json
+{
+    "title": "chili",
+    "source": "grandpa",
+    "category_id": 2
+}
+```
+
+Returns the updated recipe.
+
+### PUT to modify a recipe category by category id
+`/api/recipes/categories/:id`
+
+Requires a valid token.
+
+Required fields for modifying / updating a recipe category:
+- title
+
+```json
+{
+    "title": "appetizers"
+}
+```
+
+Returns the updated recipe category.
+
+### PUT to modify an ingredient by ingredient id
+`/api/ingredients/:id`
+
+Requires a valid token.
+
+Required fields for modifying / updating an ingredient:
+- name
+- description
+
+```json
+{
+    "name": "beef",
+    "description": "cubed"
+}
+```
+
+## DELETE Actions
+
+### DELETE to delete a recipe by recipe id
+`/api/recipes/:id`
+
+Requires a valid token.
+
+There are no require fields for deleting a recipe.
+
+Returns deleted recipe's **_id_**.
+
+### DELETE to delete a recipe category by category id
+`/api/recipes/categories/:id`
+
+Requires a valid token.
+
+There are no required fields for deleting a recipe category.
+
+Returns deleted recipe category's **_id_**.
+
+### DELETE to delete an ingredient by ingredient id
+`/api/ingredients/:id`
+
+Requires a valid token.
+
+There are no required fields for deleting an ingredient.
+
+Returns deleted ingredient's **_id_**.
