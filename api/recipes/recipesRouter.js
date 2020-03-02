@@ -57,4 +57,17 @@ router.delete('/:id', (req, res) => {
         })
 });
 
+/* GET a list of steps for a particular recipe by recipe id */
+router.get('/:id/steps', (req, res) => {
+
+    const id = req.params.id;
+    Recipes.getRecipeSteps(id)
+        .then(steps => {
+            res.status(200).json(steps);
+        })
+        .catch(err => {
+            res.status(400).json({ error: 'list of recipe steps could not be retrieved.' });
+        })
+});
+
 module.exports = router;
