@@ -5,7 +5,8 @@ module.exports = {
     addRecipe,
     editRecipe,
     deleteRecipe,
-    getRecipeSteps
+    getRecipeSteps,
+    getRecipeIngredients
 }
 
 /* GET list of recipes */
@@ -37,3 +38,11 @@ function getRecipeSteps(id) {
     return db('instructions')
         .where('recipe_id', id)
 }
+
+/* GET list of ingredients for a particular recipe by recipe id */
+function getRecipeIngredients(id) {
+    return db('recipe_ingredients')
+        .join('ingredients', 'ingredients.id', 'recipe_ingredients.ingredient_id')
+        .select('ingredients.*', 'recipe_ingredients.quantity', 'recipe_ingredients.units')
+        .where('recipe_ingredients.recipe_id', id);
+}       

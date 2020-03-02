@@ -70,4 +70,17 @@ router.get('/:id/steps', (req, res) => {
         })
 });
 
+/* GET a list of ingredients for a recipe by recipe id */
+router.get('/:id/ingredients', (req, res) => {
+
+    const id = req.params.id;
+    Recipes.getRecipeIngredients(id)
+        .then(recipe => {
+            res.status(200).json(recipe);
+        })
+        .catch(err => {
+            res.status(200).json({ error: 'list of ingredients could not be retrieved.' });
+        })
+});
+
 module.exports = router;

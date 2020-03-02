@@ -57,4 +57,18 @@ router.delete('/:id', (req, res) => {
         })
 });
 
+/* POST to add an ingredient to a recipe */
+router.post('/recipes/:id', (req, res) => {
+
+    const recipe_id = req.params.id;
+    const newIngred = { recipe_id: recipe_id, ...req.body };
+    Ingredients.addToRecipe(newIngred)
+        .then(ingred => {
+            res.status(201).json(ingred);
+        })
+        .catch(err => {
+            res.status(400).json({ error: 'ingredient could not be added' });
+        })
+});
+
 module.exports = router;

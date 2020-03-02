@@ -4,7 +4,8 @@ module.exports = {
     getIngredients,
     addIngredient,
     editIngredient,
-    deleteIngredient
+    deleteIngredient,
+    addToRecipe
 }
 
 /* GET list of ingredients */
@@ -29,4 +30,10 @@ function deleteIngredient(id) {
     return db('ingredients')
         .where({ id })
         .del();
+}
+
+/* POST to add ingredient to recipe using bridge table */
+function addToRecipe(ingredient) {
+    return db('recipe_ingredients')
+        .insert(ingredient);
 }
