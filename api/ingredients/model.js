@@ -2,6 +2,7 @@ const db = require('../../database/connection.js');
 
 module.exports = {
     getIngredients,
+    getById,
     addIngredient,
     editIngredient,
     deleteIngredient,
@@ -11,6 +12,12 @@ module.exports = {
 /* GET list of ingredients */
 function getIngredients() {
     return db('ingredients');
+}
+
+/* GET ingredient by ingredient id */
+function getById(id) {
+    return db('ingredients')
+        .where({ id });
 }
 
 /* POST to add an ingredient */

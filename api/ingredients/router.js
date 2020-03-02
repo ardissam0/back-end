@@ -17,13 +17,27 @@ router.get('/', (req, res) => {
         })
 });
 
+/* GET ingredient by ingredient id */
+router.get('/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    Ingredients.getById(id)
+        .then(ingred => {
+            res.status(200).json(ingred);
+        })
+        .catch(err => {
+            res.status(404).json({ error: 'ingredient could not be found' });
+        })
+});
+
 /* POST to add a new ingredient */
 router.post('/', (req, res) => {
 
     newIngred = req.body;
     Ingredients.addIngredient(newIngred)
         .then(ingred => {
-            res.status(201).json(newIngred);
+            res.status(201).json({ success: 'new ingredient created', id: ingred[0], ...newIngred });
         })
         .catch(err => {
             res.status(400).json({ error: 'Ingredient could not be created.' });

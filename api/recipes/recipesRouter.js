@@ -17,6 +17,20 @@ router.get('/', (req, res) => {
         })
 });
 
+/* GET recipe by recipe id */
+router.get('/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    Recipes.getById(id)
+        .then(recipe => {
+            res.status(200).json(recipe);
+        })
+        .catch(err => {
+            res.status(404).json({ error: 'recipe could not be found' });
+        })
+});
+
 /* POST to add a recipe */
 router.post('/', (req, res) => {
 

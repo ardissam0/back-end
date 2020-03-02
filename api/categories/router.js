@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
     const newCat = req.body;
     Categories.addCategory(newCat)
         .then(cat => {
-            res.status(201).json({ success: 'category created', ...newCat });
+            res.status(201).json({ success: 'category created', id: cat[0], ...newCat });
         })
         .catch(err => {
             res.status(400).json({ error: 'Category could not be created.' });
@@ -37,7 +37,7 @@ router.put('/:id', (req, res) => {
     const id = req.params.id;
     Categories.editCategory(changes, id)
         .then(updated => {
-            res.status(200).json({ success: 'category edited' });
+            res.status(200).json({ success: 'category edited', ...changes });
         })
         .catch(err => {
             res.status(400).json({ error: 'Category could not be edited.' });

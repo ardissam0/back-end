@@ -10,7 +10,7 @@ const restricted = require('../middleware/restricted.js');
 const authRouter = require('./auth/authRouter.js');
 const recipesRouter = require('./recipes/recipesRouter.js');
 const categoriesRouter = require('./categories/router.js');
-const instructionsRouter = require('./steps/router.js');
+const stepsRouter = require('./steps/router.js');
 const ingredientsRouter = require('./ingredients/router.js');
 
 /* middleware */
@@ -22,7 +22,7 @@ server.use(cors());
 server.use('/api/auth', authRouter);
 server.use('/api/recipes', restricted, recipesRouter);
 server.use('/api/categories', restricted, categoriesRouter);
-server.use('/api/instructions', restricted, instructionsRouter);
+server.use('/api/steps', restricted, stepsRouter);
 server.use('/api/ingredients', restricted, ingredientsRouter);
 
 /* endpoints */
