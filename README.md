@@ -139,6 +139,13 @@ Requires a valid token.
 
 Returns a list of all steps / instructions for a recipe based on the recipe's **_id_**.
 
+### GET a list of ingredients for a particular recipe by recipe id
+`/api/recipes/:id/ingredients`
+
+Requires a valid token.
+
+Returns a list of all ingredients for a recipe based on the recipe's **_id_**.
+
 ## POST / Creation Actions
 
 ### POST to create a new recipe
